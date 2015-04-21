@@ -1,0 +1,38 @@
+#newDeviceForm {
+	opacity: 0;
+}
+.formInput {
+	margin-top: 15px;	
+}
+.formInput input {
+	width: 50%;
+	display: inline-block;
+}
+#type {
+	width: 50%;
+	display: inline-block;
+}
+#loginSector {
+	width: 20%;
+	margin-left: 40%;
+	margin-top: 10%;
+}
+#loginButton {
+	width: 100%;
+}
+#wrapper {
+	width: 50%;
+	margin-left: 25%;	
+}
+#container {
+	margin-top: 5%;
+	text-align: center;
+}
+#header {
+	display: inline-block;
+	padding-right: 20px;
+}
+#user_name {
+	display: inline-block;
+	margin-left: 100px;
+}

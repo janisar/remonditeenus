@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='utf-8'?> 
+<!DOCTYPE hibernate-configuration PUBLIC 
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN" 
+        "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd"> 
+<hibernate-configuration> 
+    <session-factory> 
+        <!-- Database connection settings --> 
+        <property name="connection.driver_class">org.postgresql.Driver</property> 
+        <property name="connection.url">jdbc:postgresql://imbi.ld.ttu.ee/t123656</property> 
+        <property name="connection.username">t123656</property> 
+        <property name="connection.password">APCIaV3G</property> 
+       
+        <!-- JDBC connection pool (use the built-in) --> 
+        <property name="connection.pool_size">2</property> 
+
+       	<!-- SQL dialect --> 
+        <property name="dialect">org.hibernate.dialect.PostgreSQLDialect</property> 
+       
+       	<!-- Enable Hibernate's current session context --> 
+        <property name="current_session_context_class">thread</property>
+        
+        <!-- Disable the second-level cache  --> 
+        <property name="cache.provider_class">org.hibernate.cache.NoCacheProvider</property> 
+        
+        <!-- Echo all executed SQL to stdout --> 
+        <property name="show_sql">true</property> 
+        
+		<mapping class="ee.iapb61.idu0200.model.Device" />
+		<mapping class="ee.iapb61.idu0200.model.DeviceType" />
+		<mapping class="ee.iapb61.idu0200.model.user.Customer"/>
+		<mapping class="ee.iapb61.idu0200.model.user.Person"/>
+		<mapping class="ee.iapb61.idu0200.model.user.SubjectType"/>
+		<mapping class="ee.iapb61.idu0200.model.user.UserAccount"/>
+		
+		<mapping class="ee.iapb61.idu0200.model.ServiceDevice"/>
+		<mapping class="ee.iapb61.idu0200.model.ServiceDeviceStatusType"/>
+		<mapping class="ee.iapb61.idu0200.model.ServiceOrder"/>
+		<mapping class="ee.iapb61.idu0200.model.ServiceOrderStatusType"/>
+		<mapping class="ee.iapb61.idu0200.model.ServiceRequest"/>
+		<mapping class="ee.iapb61.idu0200.model.ServiceRequestStatusType"/>
+	</session-factory> 
+</hibernate-configuration> 

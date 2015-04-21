@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+
+	
+	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
+	
+	<!-- Enables the Spring MVC @Controller programming model -->
+	<annotation-driven />
+	
+	<resources mapping="/static/**" location="/static/"/>
+
+	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
+	<resources mapping="/resources/**" location="/resources/" />
+	
+	<default-servlet-handler/>
+
+	<beans:bean id="exceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+        <beans:property name="exceptionMappings">
+            <beans:props>
+                <beans:prop key="net.petrikainulainen.spring.testmvc.todo.exception.TodoNotFoundException">error/404</beans:prop>
+                <beans:prop key="java.lang.Exception">error/error</beans:prop>
+                <beans:prop key="java.lang.RuntimeException">error/error</beans:prop>
+            </beans:props>
+        </beans:property>
+        <beans:property name="statusCodes">
+            <beans:props>
+                <beans:prop key="error/404">404</beans:prop>
+                <beans:prop key="error/error">500</beans:prop>
+                <beans:prop key="error/500">500</beans:prop>
+            </beans:props>
+        </beans:property>
+    </beans:bean>
+
+	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
+	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<beans:property name="prefix" value="/WEB-INF/views/" />
+		<beans:property name="suffix" value=".jsp" />
+	</beans:bean>
+	
+    <beans:bean id="multipartResolver"
+        class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <beans:property name="maxUploadSize" value="100000" />
+    </beans:bean>
+   
+    
+    <beans:bean id="DeviceDao" class="ee.iapb61.idu0200.dao.impl.DeviceDaoImpl">
+   	</beans:bean>
+   	
+    <beans:bean id="DeviceService" class="ee.iapb61.idu0200.service.DeviceService">
+   	</beans:bean>
+   	
+   	<beans:bean id="OrderService" class="ee.iapb61.idu0200.service.OrderService">
+   	</beans:bean>
+	
+	
+	<context:component-scan base-package="ee.iapb61.idu0200" />
+
+</beans:beans>
