@@ -26,9 +26,7 @@ public class OrderService {
 		return serviceOrderBean.getServiceOrder().getServiceDevices();
 	}
 
-	public void addNewDevice(List<ServiceDevice> serviceDevices, String id) {
-		Device device = deviceDao.findById(id);
-		System.out.println("!!!!!!!" + device.getName());
+	public void addNewDevice(List<ServiceDevice> serviceDevices, Device device) {
 		ServiceDevice serviceDevice = new ServiceDevice();
 		serviceDevice.setDevice(device);
 		serviceDevices.add(serviceDevice);

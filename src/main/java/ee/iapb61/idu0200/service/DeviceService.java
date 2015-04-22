@@ -23,4 +23,8 @@ public class DeviceService {
 		List<DeviceType> deviceTypes = deviceDao.deviceTypelist();
 		deviceBean.getDeviceTypeBean().setDeviceTypes(deviceTypes);
 	}
+	
+	public Device getDeviceById(String id) {
+		return deviceDao.findById(id);
+	}
 }

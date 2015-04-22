@@ -1,6 +1,7 @@
 package ee.iapb61.idu0200.model;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -163,6 +164,9 @@ public class ServiceOrder {
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinTable(name="service_note", joinColumns = {@JoinColumn(name="service_order_fk")})
 	public List<ServiceDevice> getServiceDevices() {
+		if (this.serviceDevices == null) {
+			this.serviceDevices = new ArrayList<ServiceDevice>();
+		}
 		return serviceDevices;
 	}
 	

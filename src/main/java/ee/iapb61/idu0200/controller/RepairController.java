@@ -17,15 +17,14 @@ public class RepairController {
 	DeviceService deviceService;
 
 	@RequestMapping(value="/repair")
-	public ModelAndView repairHome(@ModelAttribute("serviceOrderBean") ServiceOrderBean serviceOrderBean, @ModelAttribute("deviceBean") DeviceBean deviceBean) {
+	public ModelAndView repairHome(@ModelAttribute("serviceOrderBean") final ServiceOrderBean serviceOrderBean, @ModelAttribute("deviceBean") DeviceBean deviceBean) {
 		ModelAndView model = new ModelAndView("repair");
 		
 		deviceService.setAllDevices(deviceBean);
 		deviceService.setAllDeviceTypes(deviceBean);
-		
-		System.out.println(deviceBean.getAllDevices().size());
+
 		model.addObject("devices", deviceBean.getAllDevices());
-		model.addObject("serviceOrderBean", serviceOrderBean);
+		//model.addObject("serviceOrderBean", serviceOrderBean);
 		model.addObject("deviceTypes", deviceBean.getDeviceTypeBean().getDeviceTypes());
 		return model;
 	}

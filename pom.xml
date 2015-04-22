@@ -8,7 +8,12 @@
   <name>Remonditeenused</name>
   <url>http://maven.apache.org</url>
   <dependencies>
- 
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<version>1.9.13</version>
+		</dependency>
+
 		<!-- database pool -->
 		<dependency>
 			<groupId>commons-dbcp</groupId>

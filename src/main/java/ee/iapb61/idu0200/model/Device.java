@@ -13,6 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
+
 @Entity
 @Table(name="device")
 public class Device implements Serializable{
@@ -88,6 +90,7 @@ public class Device implements Serializable{
 	}
 	
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JsonIgnore
 	@JoinColumn(name="device_type_fk")
 	public DeviceType getDeviceType() {
 		return deviceType;

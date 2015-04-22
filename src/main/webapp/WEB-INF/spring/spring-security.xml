@@ -11,10 +11,13 @@
  
 		<intercept-url pattern="/home/**" access="isAuthenticated()" />
 	 	<intercept-url pattern="/home/addNewDevice/**" access="isAuthenticated()" />
- 
+	 	<intercept-url pattern="/addDevice**" access="isAuthenticated()" />
+ 		
+ 		<csrf request-matcher-ref=""/>
+		
 		<!-- access denied page -->
 		<access-denied-handler error-page="/403" />
- 
+ 		
 		<form-login 
 		    login-page="/login" 
 		    default-target-url="/" 

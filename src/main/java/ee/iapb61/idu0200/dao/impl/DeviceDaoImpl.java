@@ -3,6 +3,7 @@ package ee.iapb61.idu0200.dao.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
@@ -54,8 +55,13 @@ public class DeviceDaoImpl implements DeviceDao{
 			sessionFactory = HibernateUtil.getSessionFactory();
 		}
 		Session session = sessionFactory.openSession();
+		
+		String hql = "FROM Device WHERE device= :id";
+        Query query = session.createQuery(hql);
+        query.setInteger("id", Integer.valueOf(id));
+        devices = query.list();
+        
 		session.beginTransaction();
-		devices = session.createQuery("from Device as d").list();
  
 		if (devices.size() > 0) {
 			return devices.get(0);

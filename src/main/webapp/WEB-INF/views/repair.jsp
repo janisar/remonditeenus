@@ -8,6 +8,9 @@
 <head>
 	<link rel="stylesheet" href='<c:url value="/resources/bootstrap-3.3.4-dist/css/bootstrap.min.css"/>'>
 	<link rel="stylesheet" href='<c:url value="/resources/css/style.css"/>'>
+	<meta name="_csrf" content="${_csrf.token}"/>
+	<meta name="_csrf_header" content="${_csrf.headerName}"/>
+	<meta name="_csrf_parameter" content="${_csrf.parameterName}"/>
 </head>
 <body>
 	<div id = "wrapper">
@@ -21,6 +24,7 @@
 					</c:forEach>
 					<option value="-1">Muu</option>
 				</select><br>
+				<input type="hidden" id ="csrf" name="${_csrf.parameterName}" value="${_csrf.token}" />
 			</form>
 			<button id = "add_device_to_order" type="button" class="btn btn-default" aria-label="Left Align">
 				<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
@@ -30,16 +34,15 @@
 				<tr>
 					<th>Id</th>
 					<th>Nimi</th>
-					<th>Tüüp</th>
 					<th>Mudel</th>
 					<th>Tootja</th>
-					<th>${serviceOrderBean.serviceOrder.serviceDevices}</th>
+					<th>${serviceOrderBean.hello}</th>
 				</tr>
+				
 				<c:forEach items="${serviceOrderBean.serviceOrder.serviceDevices }" var="sdevice">
 					<tr>
 						<td>${sdevice.id }</td>
 						<td>${sdevice.device.name }</td>
-						<td>${sdevice.device.deviceType }</td>
 						<td>${sdevice.device.model }</td>
 						<td>${sdevice.device.manufacturer }</td>
 					</tr>
@@ -83,6 +86,7 @@
 				      			</c:forEach>
 				      		</select>
 	      				</div>
+	      				<button class = "btn btn-primary">Lisa seade</button>
 	      			</form>
 	      		</div>
 			</div>
