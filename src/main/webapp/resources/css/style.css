@@ -1,5 +1,72 @@
+.hidden-section {
+    display: none;
+}
+.delete-order {
+    margin-top: 30px;
+    float: right;
+}
+#search-wrapper {
+    width: 50%;
+    margin-left: 25%;
+}
+#searchResult {
+    width: 50%;
+    margin-left: 25%;
+}
+#searchDevice {
+    cursor: pointer;
+}
+#job-price {
+    width: 30%;
+    padding-right: 15px;
+  display: inline-block;
+}
+.save-glyphicon {
+    cursor: pointer;
+    margin-left: 5px;
+}
 #newDeviceForm {
 	opacity: 0;
+	height: 0;
+}
+.job-current-amount {
+    width: 30%;
+    padding-right: 15px;
+  display: inline-block;
+}
+#current_jobs tr{
+    text-align: center;
+}
+
+#current_jobs th{
+    text-align: center;
+}
+
+#current_jobs tr td{
+    text-align: center;
+}
+.remove-device {
+    cursor: pointer;
+}
+.remove-part {
+    cursor: pointer;
+}
+.remove-job {
+    cursor: pointer;
+}
+.status-selector {
+    width: 30%;
+    float:right;
+}
+.request-row {
+    cursor: pointer;
+}
+.request-row:hover {
+    background-color: gray;
+}
+.request-row:AFTER {
+    background-color: black;
+    border:5px;
 }
 .formInput {
 	margin-top: 15px;	

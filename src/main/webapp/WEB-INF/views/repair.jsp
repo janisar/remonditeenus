@@ -16,55 +16,60 @@
 	<div id = "wrapper">
 		<jsp:include page="partials/header.jsp"></jsp:include>
 		<div id = "container">
-			<h3>Vali seade, mida soovid parandada:</h3>
 			<form action ="addNewDevice" method="GET" id = "newDeviceSubmitForm">
-				<select id = "device-selecter" class = "form-control" name ="deviceId">
-					<c:forEach items="${devices }" var = "device">
-						<option value="${device.deviceId}">${device.name}</option>
-					</c:forEach>
-					<option value="-1">Muu</option>
-				</select><br>
+<!--                 <h3>Vali seade: </h3> -->
+<%-- 				<select id = "device-selecter" class = "form-control" name ="deviceId"> --%>
+<%-- 					<c:forEach items="${devices }" var = "device"> --%>
+<%-- 						<option value="${device.deviceId}">${device.name}</option> --%>
+<%-- 					</c:forEach> --%>
+<!-- 					<option value="-1">Muu</option> -->
+<%-- 				</select> --%>
+<!--                 <h4>Nende seadmetega on meil kï¿½ige rohkem kokkupuuteid ning neid me parandame kiirelt,  -->
+<!--                 kui soovid uut seadet parandusse tuua, siis oma seadme saad lisada meie sï¿½steemi <a href ="#" id = "addNewDevice">SIIT</a></h4> -->
+                
 				<input type="hidden" id ="csrf" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                <h3>Mis seadmel viga on?</h3>
+                <textarea id ="desc" class="form-control" rows="2" cols=""></textarea><br>
+                <h4>Sisesta seade ning Sinu arvamus, mis seadmel viga on.</h4>
 			</form>
-			<button id = "add_device_to_order" type="button" class="btn btn-default" aria-label="Left Align">
-				<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-				Lisa toode tellimusele
-			</button>
-			<table class = "table" id = "current_devices">
-				<tr>
-					<th>Id</th>
-					<th>Nimi</th>
-					<th>Mudel</th>
-					<th>Tootja</th>
-					<th>${serviceOrderBean.hello}</th>
-				</tr>
+<!-- 			<button id = "add_device_to_order" type="button" class="btn btn-default" aria-label="Left Align"> -->
+<%-- 				<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> --%>
+<!-- 				Lisa toode tellimusele -->
+<!-- 			</button> -->
+            <p>
+<!-- 			<table class = "table" id = "current_devices"> -->
+<!-- 				<tr> -->
+<!-- 					<th>Id</th> -->
+<!-- 					<th>Nimi</th> -->
+<!-- 					<th>Mudel</th> -->
+<!-- 					<th>Tootja</th> -->
+<%-- 					<th>${serviceOrderBean.serviceOrder.serviceDevices}</th> --%>
+<!-- 				</tr> -->
 				
-				<c:forEach items="${serviceOrderBean.serviceOrder.serviceDevices }" var="sdevice">
-					<tr>
-						<td>${sdevice.id }</td>
-						<td>${sdevice.device.name }</td>
-						<td>${sdevice.device.model }</td>
-						<td>${sdevice.device.manufacturer }</td>
-					</tr>
-				</c:forEach>
-			</table>
-			<h4>Nende seadmetega on meil kõige rohkem kokkupuuteid ning neid me parandame kiirelt, 
-				kui soovid uut seadet parandusse tuua, siis oma seadme saad lisada meie süsteemi <a href ="#" id = "addNewDevice">SIIT</a></h4>
-			<h3>Mis seadmel viga on?</h3>
-			<textarea  class="form-control" rows="2" cols=""></textarea>
+<%-- 				<c:forEach items="${serviceOrderBean.devices }" var="sdevice"> --%>
+<!-- 					<tr> -->
+<%-- 						<td>${sdevice.device.deviceId }</td> --%>
+<%-- 						<td>${sdevice.device.name }</td> --%>
+<%-- 						<td>${sdevice.device.model }</td> --%>
+<%-- 						<td>${sdevice.device.manufacturer }</td> --%>
+<!-- 					</tr> -->
+<%-- 				</c:forEach> --%>
+<!-- 			</table> -->
+						
+            <button class = "btn btn-primary" id = "postOrder" type = "button">Saada seadmed remonti</button>
 				<div id = "newDeviceForm">
 				<div class="modal-header">
 	        		<h4 class="modal-title">Uue seadme lisamine</h4>
 	      		</div>
 	      		<div class="modal-body">
-	      			<form action="saveDevice" method = "POST" id = "saveDevice">
+	      			<form action="saveDevice" method = "POST" id = "saveDevice" modelAttribute="newDevice">
 	      				<div class = "formInput">
 		      				<label for ="name">Seadme nimi: </label>
 				      		<input type = "text" class="form-control" name = "name" id = "name"/><br>
 	      				</div>
 	      				<div class = "formInput">
 		      				<label for ="regNr">Registreerimisnumber: </label>
-				      		<input type = "text" class="form-control" name = "regNr" id = "regNr"/><br>
+				      		<input type = "text" class="form-control" name = "registrationNumber" id = "regNr"/><br>
 	      				</div>
 	      				<div class = "formInput">
 				      		<label for ="model">Seadme mudel: </label>
@@ -79,26 +84,30 @@
 				      		<input type = "text" class = "form-control" name = "description" id = "description"/><br>
 	      				</div>
 			      		<div class = "formInput">
-				      		<label for ="type">Seadme tüüp: </label>
-				      		<select class="form-control" id = "type">
+				      		<label for ="type">Seadme tï¿½ï¿½p: </label>
+				      		<select class="form-control" id = "type" name ="deviceId">
 				      			<c:forEach var="deviceType" items="${deviceTypes}">
-				      				<option>${deviceType.name}</option>
+				      				<option value ="${deviceType.id }">${deviceType.name}</option>
 				      			</c:forEach>
 				      		</select>
 	      				</div>
-	      				<button class = "btn btn-primary">Lisa seade</button>
+                        <input type="hidden" id ="csrf" name="${_csrf.parameterName}" value="${_csrf.token}" />
+	      				<button class = "btn btn-primary" id = "saveNewDevice">Lisa seade</button>
 	      			</form>
 	      		</div>
 			</div>
+            
 		</div>
 	</div>
 
 	<script type="text/javascript" src='<c:url value = "/resources/js/jquery-2.1.3.min.js"/>'></script>
 	<script type="text/javascript" src='<c:url value = "/resources/js/common.js"/>'></script>
 	<script type="text/javascript" src='<c:url value = "/resources/js/repair.js"/>'></script>
+	<script type="text/javascript" src='<c:url value = "/resources/js/callHelper.js"/>'></script>
 	<script type="text/javascript" src='<c:url value = "/resources/bootstrap-3.3.4-dist/js/bootstrap.min.js"/>'></script>
 	<script>
 		repairDeviceSelector.initField();
+		postOrder.initField();
 	</script>
 </body>
 </html>

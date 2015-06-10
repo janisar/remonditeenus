@@ -28,7 +28,7 @@ public class DeviceType implements Serializable{
 	 */
 	private static final long serialVersionUID = -5171387248020534908L;
 
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "super_type_fk")
 	@NotFound(action = NotFoundAction.IGNORE)
 	private DeviceType superDevice;

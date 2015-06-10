@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
 
@@ -26,11 +28,26 @@ public class Device implements Serializable{
 	
 	@Id
 	private int deviceId;
+	
+	@NotNull(message="Nimi ei tohi olla tühi")
+	@Pattern(regexp="[A-Za-z]{2,12}$", message="Nimi koosneb tähtedest ning on maksimaalselt 12 tähemärki")
 	private String name;
 	private DeviceType deviceType;
+	
+	@NotNull(message="Registreerimisnumber ei tohi olla tühi")
+	@Pattern(regexp="[A-Za-z0-9\\s]{2,6}$", message="Registreerimisnumber peab olema 2 kuni 6 tähemärki pikk")
 	private String registrationNumber;
+	
+	@NotNull(message="Kirjeldus ei tohi olla tühi")
+	@Pattern(regexp="[A-Za-z0-9\\s].*{2,100}$", message="Kirjeldus peab olema 2 kuni 100 tähemärki pikk")
 	private String description;
+	
+	@NotNull(message="mudel ei tohi olla tühi")
+	@Pattern(regexp="[A-Za-z0-9\\s]{2,6}$", message="Mudel peab olema 2 kuni 6 tähemärki pikk")
 	private String model;
+	
+	@NotNull(message="Tootja ei tohi olla tühi")
+	@Pattern(regexp="[A-Za-z0-9\\s]{2,12}$", message="Tootja peab olema 2 kuni 12 tähemärki pikk")
 	private String manufacturer;
 	
 	@Column(name="name")
@@ -43,7 +60,7 @@ public class Device implements Serializable{
 	}
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="device", nullable=false)
 	public int getDeviceId() {
 		return deviceId;

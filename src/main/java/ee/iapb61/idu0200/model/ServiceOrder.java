@@ -1,6 +1,5 @@
 package ee.iapb61.idu0200.model;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -13,12 +12,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
 
@@ -48,12 +48,16 @@ public class ServiceOrder {
 	
 	private List<ServiceDevice> serviceDevices;
 	
-	private BigDecimal totalPrice;
+	private List<ServicePart> serviceParts;
+	
+	private List<ServiceAction> serviceAction;
+	
+	private Double totalPrice;
 	
 	private String note;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="service_order")
 	public int getId() {
 		return id;
@@ -64,7 +68,7 @@ public class ServiceOrder {
 	}
 
 	@ManyToOne
-	@JoinColumn(name="so_status_type_fk")
+	@JoinColumn(name="so_status_type_fk", nullable=true)
 	public ServiceOrderStatusType getServiceOrderStatusType() {
 		return serviceOrderStatusType;
 	}
@@ -74,7 +78,8 @@ public class ServiceOrder {
 		this.serviceOrderStatusType = serviceOrderStatusType;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY, optional=true)
+	@NotFound(action=NotFoundAction.IGNORE)
 	@JoinColumn(name="created_by")
 	public Person getCreatedBy() {
 		return createdBy;
@@ -84,8 +89,8 @@ public class ServiceOrder {
 		this.createdBy = createdBy;
 	}
 
-	@OneToOne
-	@JoinColumn(name="service_request_fk")
+	@OneToOne(optional=true)
+	@JoinColumn(name="service_request_fk", unique=true)
 	public ServiceRequest getServiceRequest() {
 		return serviceRequest;
 	}
@@ -94,7 +99,7 @@ public class ServiceOrder {
 		this.serviceRequest = serviceRequest;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional=true)
 	@NotFound(action=NotFoundAction.IGNORE)
 	@JoinColumn(name="updated_by")
 	public Person getUpdatedBy() {
@@ -105,7 +110,7 @@ public class ServiceOrder {
 		this.updatedBy = updatedBy;
 	}
 
-	@Column(name="created")
+	@Column(name="created",nullable=true)
 	public Date getCreatedDate() {
 		return createdDate;
 	}
@@ -114,7 +119,7 @@ public class ServiceOrder {
 		this.createdDate = createdDate;
 	}
 
-	@Column(name="updated")
+	@Column(name="updated", nullable=true)
 	public Date getUpdatedDate() {
 		return updatedDate;
 	}
@@ -123,7 +128,7 @@ public class ServiceOrder {
 		this.updatedDate = updatedDate;
 	}
 
-	@Column(name="status_changed")
+	@Column(name="status_changed", nullable=true)
 	public Date getStatusChangedDate() {
 		return statusChangedDate;
 	}
@@ -132,7 +137,7 @@ public class ServiceOrder {
 		this.statusChangedDate = statusChangedDate;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional=true)
 	@JoinColumn(name="status_changed_by")
 	@NotFound(action=NotFoundAction.IGNORE)
 	public Person getStatusChangedBy() {
@@ -143,16 +148,16 @@ public class ServiceOrder {
 		this.statusChangedBy = statusChangedBy;
 	}
 
-	@Column(name="price_total")
-	public BigDecimal getTotalPrice() {
+	@Column(name="price_total", nullable=true)
+	public Double getTotalPrice() {
 		return totalPrice;
 	}
 
-	public void setTotalPrice(BigDecimal totalPrice) {
+	public void setTotalPrice(Double totalPrice) {
 		this.totalPrice = totalPrice;
 	}
 
-	@Column(name="note")
+	@Column(name="note", nullable=true)
 	public String getNote() {
 		return note;
 	}
@@ -161,8 +166,8 @@ public class ServiceOrder {
 		this.note = note;
 	}
 
-	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinTable(name="service_note", joinColumns = {@JoinColumn(name="service_order_fk")})
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy="serviceOrder")
+	@NotFound(action=NotFoundAction.IGNORE)
 	public List<ServiceDevice> getServiceDevices() {
 		if (this.serviceDevices == null) {
 			this.serviceDevices = new ArrayList<ServiceDevice>();
@@ -172,5 +177,27 @@ public class ServiceOrder {
 	
 	public void setServiceDevices(List<ServiceDevice> serviceDevices) {
 		this.serviceDevices = serviceDevices;
+	}
+	
+	@OneToMany(cascade = CascadeType.ALL, mappedBy="serviceOrder")
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@NotFound(action=NotFoundAction.IGNORE)
+	public List<ServicePart> getServiceParts() {
+		return serviceParts;
+	}
+	
+	public void setServiceParts(List<ServicePart> serviceParts) {
+		this.serviceParts = serviceParts;
+	}
+	
+	@OneToMany(cascade = CascadeType.ALL, mappedBy="serviceOrder")
+	@LazyCollection(LazyCollectionOption.FALSE)
+	@NotFound(action=NotFoundAction.IGNORE)
+	public List<ServiceAction> getServiceAction() {
+		return serviceAction;
+	}
+	
+	public void setServiceAction(List<ServiceAction> serviceAction) {
+		this.serviceAction = serviceAction;
 	}
 }

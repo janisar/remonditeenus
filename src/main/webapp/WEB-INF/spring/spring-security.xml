@@ -12,9 +12,8 @@
 		<intercept-url pattern="/home/**" access="isAuthenticated()" />
 	 	<intercept-url pattern="/home/addNewDevice/**" access="isAuthenticated()" />
 	 	<intercept-url pattern="/addDevice**" access="isAuthenticated()" />
+        
  		
- 		<csrf request-matcher-ref=""/>
-		
 		<!-- access denied page -->
 		<access-denied-handler error-page="/403" />
  		
@@ -23,8 +22,16 @@
 		    default-target-url="/" 
 			authentication-failure-url="/login?error" 
 			username-parameter="username"
-			password-parameter="password" />
-		<logout logout-success-url="/login?logout"  />
+			password-parameter="password"
+            authentication-success-handler-ref="savedRequestAwareAuthenticationSuccessHandler"  />
+        
+		<logout logout-success-url="/login" logout-url="/j_spring_security_logout" />
+        
+<!--         <remember-me  -->
+<!--             token-validity-seconds="1209600" -->
+<!--             remember-me-parameter="remember-me"  -->
+<!--             data-source-ref="dataSource" /> -->
+        
 		<!-- enable csrf protection -->
 		<csrf/>
 	</http>

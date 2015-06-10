@@ -34,7 +34,7 @@
             <beans:props>
                 <beans:prop key="error/404">404</beans:prop>
                 <beans:prop key="error/error">500</beans:prop>
-                <beans:prop key="error/500">500</beans:prop>
+                <beans:prop key="error/400">400</beans:prop>
             </beans:props>
         </beans:property>
     </beans:bean>
@@ -52,13 +52,32 @@
    
     
     <beans:bean id="DeviceDao" class="ee.iapb61.idu0200.dao.impl.DeviceDaoImpl">
-   	</beans:bean>
+    </beans:bean>
+    
+    <beans:bean id="PersonDao" class="ee.iapb61.idu0200.dao.impl.PersonDaoImpl">
+    </beans:bean>
+    
+    <beans:bean id="OrderDao" class="ee.iapb61.idu0200.dao.impl.OrderDaoImpl">
+    </beans:bean>
+    
+    <beans:bean id="RequestDao" class="ee.iapb61.idu0200.dao.impl.RequestDaoImpl">
+    </beans:bean>
    	
     <beans:bean id="DeviceService" class="ee.iapb61.idu0200.service.DeviceService">
    	</beans:bean>
    	
    	<beans:bean id="OrderService" class="ee.iapb61.idu0200.service.OrderService">
-   	</beans:bean>
+    </beans:bean>
+    
+    <beans:bean id="PersonService" class="ee.iapb61.idu0200.service.PersonService">
+    </beans:bean>
+  
+   <beans:bean id="RequestServie" class="ee.iapb61.idu0200.service.RequestService">
+    </beans:bean>
+    
+   <beans:bean id="ClassifierDao" class="ee.iapb61.idu0200.dao.impl.ClassifierDaoImpl">
+    </beans:bean>
+  
 	
 	
 	<context:component-scan base-package="ee.iapb61.idu0200" />

@@ -33,7 +33,7 @@ public class UserAccount {
 	private Person createdBy;
 	private Date created;
 	
-	private boolean passwordNeverExpires;
+	private Boolean passwordNeverExpires;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -131,12 +131,12 @@ public class UserAccount {
 		this.created = created;
 	}
 
-	@Column(name="password_never_expires")
-	public boolean isPasswordNeverExpires() {
+	@Column(name="password_never_expires", nullable=true)
+	public Boolean isPasswordNeverExpires() {
 		return passwordNeverExpires;
 	}
 
-	public void setPasswordNeverExpires(boolean passwordNeverExpires) {
+	public void setPasswordNeverExpires(Boolean passwordNeverExpires) {
 		this.passwordNeverExpires = passwordNeverExpires;
 	}
 	

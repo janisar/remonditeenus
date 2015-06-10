@@ -15,7 +15,7 @@ public class SubjectType {
 	private String name;
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="subject_type", nullable=false)
 	public int getId() {
 		return id;

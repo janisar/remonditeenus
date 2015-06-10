@@ -35,8 +35,15 @@
 		<mapping class="ee.iapb61.idu0200.model.ServiceDevice"/>
 		<mapping class="ee.iapb61.idu0200.model.ServiceDeviceStatusType"/>
 		<mapping class="ee.iapb61.idu0200.model.ServiceOrder"/>
+        <mapping class="ee.iapb61.idu0200.model.ServicePart"/>
 		<mapping class="ee.iapb61.idu0200.model.ServiceOrderStatusType"/>
-		<mapping class="ee.iapb61.idu0200.model.ServiceRequest"/>
-		<mapping class="ee.iapb61.idu0200.model.ServiceRequestStatusType"/>
+        <mapping class="ee.iapb61.idu0200.model.ServiceRequest"/>
+        <mapping class="ee.iapb61.idu0200.model.ServiceRequestStatusType"/>
+        
+        <mapping class="ee.iapb61.idu0200.model.ServiceAction"/>
+        <mapping class="ee.iapb61.idu0200.model.ServiceActionStatusType"/>
+        <mapping class="ee.iapb61.idu0200.model.ServiceType"/>
+        <mapping class="ee.iapb61.idu0200.model.ServiceUnitType"/>
+        
 	</session-factory> 
 </hibernate-configuration> 

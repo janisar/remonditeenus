@@ -15,7 +15,7 @@ import javax.persistence.Table;
 public class Customer {
 
 
-	private Person suject;
+	private Person subject;
 	
 	private SubjectType subjectType;
 	
@@ -33,16 +33,16 @@ public class Customer {
 	
 	@OneToOne
 	@JoinColumn(name = "subject_fk")
-	public Person getSuject() {
-		return suject;
+	public Person getSubject() {
+		return subject;
 	}
 	
-	public void setSuject(Person suject) {
-		this.suject = suject;
+	public void setSubject(Person subject) {
+		this.subject = subject;
 	}
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "customer", nullable=false)
 	public int getId() {
 		return id;

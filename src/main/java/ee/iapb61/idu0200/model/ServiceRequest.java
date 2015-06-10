@@ -22,7 +22,7 @@ public class ServiceRequest {
 	
 	private int id;
 	
-	private Customer customer;
+	public Customer customer;
 	
 	private Person createdBy;
 	
@@ -32,11 +32,10 @@ public class ServiceRequest {
 	
 	private String serviceDescriptionByEmployee;
 	
-	
-	private ServiceRequestStatusType serviceRequestStatusType;
+	public ServiceRequestStatusType serviceRequestStatusType;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="service_request")
 	public int getId() {
 		return id;
@@ -46,7 +45,7 @@ public class ServiceRequest {
 		this.id = id;
 	}
 
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name="customer_fk")
 	public Customer getCustomer() {
 		return customer;
